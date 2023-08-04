@@ -1,7 +1,6 @@
 #Importing Items
 import datetime
 import os
-import subprocess
 
 #Global variables
 grand_total = 0
@@ -10,13 +9,10 @@ current_datetime = datetime.datetime.now()
 #Clearing the text file
 open("purchase_history.txt", 'w').close()
 
-#Clearing the console
+#Clearing the terminal
 def clear():
-    if os.name == 'nt':  # For Windows
-        subprocess.call('cls', shell=True)
-    else:  # For other platforms (Linux, macOS)
-        subprocess.call('clear', shell=True)
-
+    """This funtion will clear the terminal after each attempt"""
+    os.system('cls' if os.name == 'nt' else 'clear')
 
 # List of items
 items = {
@@ -27,11 +23,10 @@ items = {
     "stamp": 70
 }
 
-
+#Taking input from the user
 def start():
     while True:
-        user_data = input(
-            "Which sports item you want to buy.\nType 'bat' , 'ball' , 'osaka' , 'football' or 'stamp'.\nType 'E' for Exit or 'T' for Total: ").lower()
+        user_data = input("Which sports item you want to buy.\nType 'bat' , 'ball' , 'osaka' , 'football' or 'stamp'.\nType 'E' for Exit or 'T' for Total: ").lower()
         if user_data in items:
             return user_data
         elif user_data == 'e':
@@ -42,7 +37,7 @@ def start():
             clear()
             print(f"Invalid Item. Please input a valid item")
 
-
+#Calculating the prices of the items
 def buying(name, price):
     global grand_total
     quantity = int(input(f"How many {name} you want to buy: "))
@@ -55,7 +50,7 @@ def buying(name, price):
     clear()
     return buy_more
 
-
+#Buying starting
 while True:
     choice = start()
 
@@ -72,6 +67,7 @@ while True:
         item_price = items[choice]
         buying_continue = buying(choice, item_price)
 
+        #Buying end
         if buying_continue == 'n':
             with open("purchase_history.txt", "a") as file:
                 file.write(f"----------------------------\n")
