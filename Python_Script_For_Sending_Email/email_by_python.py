@@ -1,13 +1,12 @@
-
 from email.message import EmailMessage
 import ssl
 import smtplib
 
 email_sender="**************"
-email_password="***************" #this password is generated from google account. see resource
+email_password="***************" #this password is generated from a Google account. see resource
 email_receiver="*************"
 
-subject="Send email with python"
+subject="Send an email with python"
 body='''A SMOOTH SEA NEVER MADE A SKILLED SAILOR'''
 
 em=EmailMessage()
